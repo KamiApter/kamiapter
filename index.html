@@ -493,9 +493,17 @@
     .video-carousel::-webkit-scrollbar { height: 6px; }
     .video-carousel::-webkit-scrollbar-thumb { background: var(--blush); border-radius: 100px; }
     .video-card {
-      flex: 0 0 220px; scroll-snap-align: start;
+      flex: 0 0 240px; scroll-snap-align: start;
       background: var(--white); border-radius: 8px; overflow: hidden;
       border: 1px solid var(--border);
+    }
+    .video-frame-wrap {
+      width: 100%; aspect-ratio: 9/16; background: var(--ink);
+      position: relative; overflow: hidden;
+    }
+    .video-frame-wrap iframe {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      border: none; display: block;
     }
     .video-thumb {
       width: 100%; aspect-ratio: 9/16; background: var(--ink);
@@ -1175,41 +1183,36 @@
 
     <div class="video-carousel fade-up">
       <div class="video-card">
-        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kami.apter/video/7519703561828191501" data-video-id="7519703561828191501" style="max-width: 100%; min-width: 100%; margin: 0;">
-          <section>
-            <a target="_blank" href="https://www.tiktok.com/@kami.apter">@kami.apter</a>
-          </section>
-        </blockquote>
+        <div class="video-frame-wrap">
+          <iframe src="https://www.tiktok.com/embed/v2/7519703561828191501" allow="encrypted-media" allowfullscreen loading="lazy"></iframe>
+        </div>
         <div class="video-info">
           <h4>Tuspazio Aesthetics</h4>
           <p>Facial & skincare feature reel</p>
         </div>
       </div>
       <div class="video-card">
-        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kami.apter/video/7521173330250976526" data-video-id="7521173330250976526" style="max-width: 100%; min-width: 100%; margin: 0;">
-          <section>
-            <a target="_blank" href="https://www.tiktok.com/@kami.apter">@kami.apter</a>
-          </section>
-        </blockquote>
+        <div class="video-frame-wrap">
+          <iframe src="https://www.tiktok.com/embed/v2/7521173330250976526" allow="encrypted-media" allowfullscreen loading="lazy"></iframe>
+        </div>
         <div class="video-info">
           <h4>Valencia Couture</h4>
           <p>Behind-the-scenes vlog feature</p>
         </div>
       </div>
       <div class="video-card">
-        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kami.apter/video/7554944488871841038" data-video-id="7554944488871841038" style="max-width: 100%; min-width: 100%; margin: 0;">
-          <section>
-            <a target="_blank" href="https://www.tiktok.com/@kami.apter">@kami.apter</a>
-          </section>
-        </blockquote>
+        <div class="video-frame-wrap">
+          <iframe src="https://www.tiktok.com/embed/v2/7554944488871841038" allow="encrypted-media" allowfullscreen loading="lazy"></iframe>
+        </div>
         <div class="video-info">
           <h4>West Texas Teeth GlowUp</h4>
           <p>Pageant prep day, shot & edited</p>
         </div>
       </div>
       <div class="video-card">
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DXSVZ1Dp2In/" data-instgrm-version="14" style="max-width: 100%; min-width: 100%; margin: 0;">
-        </blockquote>
+        <div class="video-frame-wrap">
+          <iframe src="https://www.instagram.com/reel/DXSVZ1Dp2In/embed" allow="encrypted-media" allowfullscreen loading="lazy"></iframe>
+        </div>
         <div class="video-info">
           <h4>Sterlings Hair Salon</h4>
           <p>Competition morning reel</p>
@@ -1476,7 +1479,5 @@
   fixAboutGrid();
   window.addEventListener('resize', fixAboutGrid);
 </script>
-<script async src="https://www.tiktok.com/embed.js"></script>
-<script async src="https://www.instagram.com/embed.js"></script>
 </body>
 </html>
