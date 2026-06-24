@@ -60,6 +60,8 @@
       background: none; border: none; cursor: pointer; padding: 0;
       display: flex; align-items: center; gap: 7px;
       white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis;
+      flex-shrink: 1; min-width: 0;
     }
     .nav-logo::before {
       content: '✦';
@@ -68,6 +70,7 @@
     }
     .nav-links {
       display: flex; align-items: center; gap: 34px; list-style: none;
+      flex-shrink: 0;
     }
     .nav-links li { position: relative; }
     .nav-links button {
@@ -89,6 +92,8 @@
     .nav-links button:hover { color: var(--ink); }
     .nav-links button.active { color: var(--rose-d); font-weight: 500; }
     .nav-links button.active::after { transform: scaleX(1); }
+
+    /* ── GLOSSY GOLD NAV BUTTONS ── */
     .nav-cta {
       background: var(--ink); color: var(--white) !important;
       padding: 9px 22px !important; border-radius: 30px; font-weight: 500 !important;
@@ -99,9 +104,18 @@
     .nav-cta::after { display: none; }
     .nav-cta:hover { background: var(--gold) !important; color: var(--white) !important; transform: translateY(-1px); }
     @media(max-width: 640px) {
-      nav { padding: 0 22px; }
-      .nav-links { gap: 18px; }
+      nav { padding: 0 16px; }
+      .nav-logo { font-size: 1.05rem; }
+      .nav-links { gap: 8px; }
       .nav-links li:not(:last-child):not(:nth-last-child(2)) { display: none; }
+      .nav-cta { padding: 7px 16px !important; font-size: 11px !important; }
+    }
+    @media(max-width: 420px) {
+      nav { padding: 0 12px; gap: 6px; }
+      .nav-logo { font-size: .88rem; }
+      .nav-logo::before { font-size: .55rem; }
+      .nav-links { gap: 5px; }
+      .nav-cta { padding: 6px 12px !important; font-size: 10px !important; }
     }
 
     /* ── TAB PAGES ── */
@@ -328,7 +342,7 @@
       background: var(--white); border: 1px solid var(--border); border-radius: 8px;
       padding: 28px 20px; text-align: center;
     }
-    .jacket-wrap svg { filter: drop-shadow(0 12px 24px rgba(58,34,41,.14)); max-width: 280px; }
+    .jacket-wrap svg { max-width: 280px; }
     .jacket-label {
       font-size: 10px; font-weight: 600; letter-spacing: .2em;
       text-transform: uppercase; color: var(--rose-d); margin-bottom: 16px;
@@ -339,17 +353,17 @@
     }
 
     /* SVG jacket zones */
-    .jzone { transition: fill .3s, opacity .3s, stroke-opacity .3s; cursor: default; stroke: rgba(212,181,106,.45); stroke-width: 1; stroke-dasharray: 3,3; }
+    .jzone { transition: fill .3s, opacity .3s, stroke-opacity .3s; cursor: default; stroke: rgba(58,34,41,.3); stroke-width: 1; stroke-dasharray: 3,3; }
     .jzone-back   { fill: rgba(191,154,63,0); }
     .jzone-chest  { fill: rgba(191,154,63,0); }
     .jzone-sleeve { fill: rgba(191,154,63,0); }
     .jzone-lining { fill: rgba(191,154,63,0); }
-    .jzone-back.lit   { fill: rgba(212,181,106,.88); stroke: none; }
-    .jzone-chest.lit  { fill: rgba(212,181,106,.72); stroke: none; }
-    .jzone-sleeve.lit { fill: rgba(212,181,106,.65); stroke: none; }
-    .jzone-lining.lit { fill: rgba(212,181,106,.55); stroke: none; }
+    .jzone-back.lit   { fill: rgba(191,154,63,.75); stroke: none; }
+    .jzone-chest.lit  { fill: rgba(191,154,63,.6); stroke: none; }
+    .jzone-sleeve.lit { fill: rgba(191,154,63,.5); stroke: none; }
+    .jzone-lining.lit { fill: rgba(191,154,63,.4); stroke: none; }
 
-    .zone-label { font-family: 'Inter', sans-serif; fill: rgba(255,247,248,0); font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; transition: fill .3s; }
+    .zone-label { font-family: 'Inter', sans-serif; fill: rgba(58,34,41,0); font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; transition: fill .3s; }
     .zone-label.lit { fill: rgba(58,34,41,.88); }
 
     /* ── SERVICE SPONSORS ── */
@@ -641,6 +655,7 @@
     <li><button onclick="showPage('home')" id="navtab-home" class="active">Home</button></li>
     <li><button onclick="showPage('sponsors')" id="navtab-sponsors">Sponsors</button></li>
     <li><button onclick="showPage('foundation')" id="navtab-foundation">Foundation</button></li>
+    <li><button onclick="showPage('sponsors', this); setTimeout(()=>document.getElementById('form').scrollIntoView(),50)" id="navtab-contact">Contact</button></li>
     <li><button onclick="showPage('sponsors'); setTimeout(()=>document.getElementById('form').scrollIntoView(),50)" class="nav-cta">Become a Sponsor</button></li>
   </ul>
 </nav>
@@ -744,7 +759,8 @@
 </section>
 
 </div>
-<!-- ══════════════════ END HOME PAGE ══════════════════ -->
+
+
 
 <!-- ══════════════════ SPONSORS PAGE ══════════════════ -->
 <div class="page" id="page-sponsors" data-page="sponsors">
@@ -782,7 +798,7 @@
             </div>
           </div>
           <ul class="tier-perks">
-            <li>Large logo — your choice of UPPER BACK or FRONT CHEST (prime, most-seen position)</li>
+            <li>Large logo — UPPER BACK (prime, most-seen position)</li>
             <li>Dedicated post on all 4 platforms: Instagram, TikTok, Facebook, YouTube</li>
             <li>60-second professional promo video featuring your business (shot by Sabor Studios)</li>
             <li>Featured in my pageant journey vlog with verbal shoutout</li>
@@ -806,7 +822,7 @@
             </div>
           </div>
           <ul class="tier-perks">
-            <li>Medium logo — LOWER BACK of jacket</li>
+            <li>Medium logo — MID BACK of jacket</li>
             <li>Dedicated sponsor post on Instagram + TikTok</li>
             <li>30-second promotional reel featuring your business</li>
             <li>Mentioned in pageant vlog with on-screen logo</li>
@@ -829,7 +845,7 @@
             </div>
           </div>
           <ul class="tier-perks">
-            <li>Small logo — SLEEVE or LOWER BACK of jacket</li>
+            <li>Small logo — LOWER BACK of jacket</li>
             <li>Shoutout post on Instagram + Facebook</li>
             <li>Named and tagged in pageant journey posts</li>
             <li>Listed on kamiapter.com sponsor page</li>
@@ -850,7 +866,7 @@
             </div>
           </div>
           <ul class="tier-perks">
-            <li>Business name — lines the BOTTOM HEM of the jacket</li>
+            <li>Business name — lines the BOTTOM BACK of the jacket</li>
             <li>Thank-you mention on social media stories</li>
             <li>Listed by name on kamiapter.com sponsor page</li>
             <li>Verbal acknowledgment in competition-day content</li>
@@ -860,90 +876,48 @@
 
       </div>
 
-      <!-- RIGHT: JACKET MOCKUP -->
+      <!-- RIGHT: JACKET DIAGRAM -->
       <div class="jacket-col fade-up">
         <div class="jacket-wrap">
           <p class="jacket-label" id="jacket-label">Premier — Upper Back</p>
 
-          <!-- SVG Jacket Mockup -->
-          <svg viewBox="0 0 320 400" width="100%" xmlns="http://www.w3.org/2000/svg" aria-label="Realistic bomber jacket mockup showing sponsor logo placement zones">
-            <defs>
-              <linearGradient id="jacketBody" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#4A3038"/>
-                <stop offset="45%" stop-color="#3A2229"/>
-                <stop offset="100%" stop-color="#2C181E"/>
-              </linearGradient>
-              <linearGradient id="jacketSleeveL" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#3F2730"/>
-                <stop offset="100%" stop-color="#291720"/>
-              </linearGradient>
-              <linearGradient id="jacketSleeveR" x1="100%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#3F2730"/>
-                <stop offset="100%" stop-color="#291720"/>
-              </linearGradient>
-              <linearGradient id="ribKnit" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#9E4259"/>
-                <stop offset="50%" stop-color="#C4607A"/>
-                <stop offset="100%" stop-color="#9E4259"/>
-              </linearGradient>
-              <radialGradient id="fabricSheen" cx="35%" cy="20%" r="70%">
-                <stop offset="0%" stop-color="#FFFFFF" stop-opacity=".09"/>
-                <stop offset="60%" stop-color="#FFFFFF" stop-opacity="0"/>
-              </radialGradient>
-            </defs>
-
-            <!-- LEFT SLEEVE -->
-            <path d="M88 78 C56 86, 30 112, 22 158 L18 230 C17 246, 24 256, 38 256 L60 256 C68 256, 73 248, 74 238 L86 150 Z"
-                  fill="url(#jacketSleeveL)" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/>
-            <!-- left cuff rib -->
-            <path d="M22 234 L60 234 L60 256 C60 256, 50 260, 41 260 C30 260, 19 256, 18 248 Z" fill="url(#ribKnit)" opacity=".92"/>
-
-            <!-- RIGHT SLEEVE -->
-            <path d="M232 78 C264 86, 290 112, 298 158 L302 230 C303 246, 296 256, 282 256 L260 256 C252 256, 247 248, 246 238 L234 150 Z"
-                  fill="url(#jacketSleeveR)" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/>
-            <!-- right cuff rib -->
-            <path d="M298 234 L260 234 L260 256 C260 256, 270 260, 279 260 C290 260, 301 256, 302 248 Z" fill="url(#ribKnit)" opacity=".92"/>
-
-            <!-- JACKET BODY (back view) -->
-            <path d="M104 56 C104 40, 130 28, 160 28 C190 28, 216 40, 216 56 L228 92 C232 104, 234 116, 234 132 L234 330 C234 346, 222 358, 206 358 L114 358 C98 358, 86 346, 86 330 L86 132 C86 116, 88 104, 92 92 Z"
-                  fill="url(#jacketBody)" stroke="rgba(0,0,0,.4)" stroke-width="1.5"/>
-            <path d="M104 56 C104 40, 130 28, 160 28 C190 28, 216 40, 216 56 L228 92 C232 104, 234 116, 234 132 L234 330 C234 346, 222 358, 206 358 L114 358 C98 358, 86 346, 86 330 L86 132 C86 116, 88 104, 92 92 Z"
-                  fill="url(#fabricSheen)"/>
-
-            <!-- collar rib -->
-            <path d="M118 50 C118 38, 138 26, 160 26 C182 26, 202 38, 202 50 L196 64 C182 56, 170 52, 160 52 C150 52, 138 56, 124 64 Z" fill="url(#ribKnit)"/>
-
-            <!-- waist hem rib -->
-            <path d="M86 326 C86 326, 86 358, 114 358 L206 358 C222 358, 234 346, 234 330 L234 320 L86 320 Z" fill="rgba(0,0,0,.18)"/>
-            <path d="M88 338 L232 338 L233 332 C233 332, 233 350, 206 354 L114 354 C98 354, 88 348, 88 338 Z" fill="url(#ribKnit)" opacity=".85"/>
-
-            <!-- center back seam -->
-            <line x1="160" y1="56" x2="160" y2="358" stroke="rgba(0,0,0,.22)" stroke-width="1" stroke-dasharray="1,3"/>
-            <!-- shoulder seams -->
-            <path d="M104 56 L160 70 L216 56" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="1"/>
-
-            <!-- ══ ZONE: UPPER BACK (large, Premier) ══ -->
-            <rect class="jzone jzone-back lit" x="112" y="92" width="96" height="80" rx="6"/>
-            <text class="zone-label lit" x="160" y="126" text-anchor="middle">UPPER BACK</text>
-            <text class="zone-label lit" x="160" y="140" text-anchor="middle" style="font-size:8px; opacity:.75;">LARGE LOGO</text>
-
-            <!-- ══ ZONE: LOWER BACK (medium, Gold) ══ -->
-            <rect class="jzone jzone-chest" x="118" y="186" width="84" height="64" rx="5"/>
-            <text class="zone-label" x="160" y="222" text-anchor="middle">LOWER BACK</text>
-
-            <!-- ══ ZONE: SLEEVE (small, Silver) — left sleeve patch ══ -->
-            <rect class="jzone jzone-sleeve" x="34" y="150" width="36" height="30" rx="4"/>
-            <text class="zone-label" x="52" y="169" text-anchor="middle" style="font-size:7.5px;">SLEEVE</text>
-
-            <!-- ══ ZONE: BOTTOM HEM (name only, Bronze) ══ -->
-            <rect class="jzone jzone-lining" x="92" y="300" width="136" height="16" rx="3"/>
-            <text class="zone-label" x="160" y="312" text-anchor="middle" style="font-size:7.5px;">BOTTOM HEM</text>
-
-            <!-- crown emblem (drawn, not emoji, for reliable rendering) -->
-            <g transform="translate(160,40)" fill="rgba(212,181,106,.9)">
-              <path d="M-14 4 L-10 -8 L-4 0 L0 -10 L4 0 L10 -8 L14 4 Z"/>
-              <rect x="-14" y="4" width="28" height="3" rx="1"/>
+          <!-- SVG Jacket Diagram -->
+          <svg viewBox="0 0 220 280" width="100%" xmlns="http://www.w3.org/2000/svg" aria-label="Jacket diagram showing sponsor logo placement">
+            <!-- JACKET BODY OUTLINE -->
+            <g fill="none" stroke="rgba(58,34,41,.25)" stroke-width="1.2">
+              <!-- Body -->
+              <path d="M60 60 L30 110 L30 240 L190 240 L190 110 L160 60" />
+              <!-- Left sleeve -->
+              <path d="M30 110 L5 150 L20 180 L50 140 L30 110" />
+              <!-- Right sleeve -->
+              <path d="M190 110 L215 150 L200 180 L170 140 L190 110" />
+              <!-- Collar left -->
+              <path d="M60 60 L85 40 L110 70" />
+              <!-- Collar right -->
+              <path d="M160 60 L135 40 L110 70" />
+              <!-- Center line -->
+              <line x1="110" y1="70" x2="110" y2="240" stroke-dasharray="4,4" stroke="rgba(58,34,41,.12)"/>
             </g>
+
+            <!-- ZONE: PREMIER — UPPER BACK (largest) -->
+            <rect class="jzone jzone-back lit" x="68" y="82" width="84" height="50" rx="4"/>
+            <text class="zone-label lit" x="110" y="103" text-anchor="middle">UPPER BACK</text>
+            <text class="zone-label lit" x="110" y="114" text-anchor="middle" style="font-size:7px; opacity:.7;">LARGE LOGO</text>
+
+            <!-- ZONE: GOLD — MID BACK (medium) -->
+            <rect class="jzone jzone-chest" x="74" y="136" width="72" height="38" rx="3"/>
+            <text class="zone-label" x="110" y="158" text-anchor="middle">MID BACK</text>
+
+            <!-- ZONE: SILVER — LOWER BACK (small) -->
+            <rect class="jzone jzone-sleeve" x="80" y="178" width="60" height="28" rx="3"/>
+            <text class="zone-label" x="110" y="195" text-anchor="middle" style="font-size:7.5px;">LOWER BACK</text>
+
+            <!-- ZONE: BRONZE — BOTTOM BACK (name strip) -->
+            <rect class="jzone jzone-lining" x="86" y="210" width="48" height="16" rx="2"/>
+            <text class="zone-label" x="110" y="221" text-anchor="middle" style="font-size:6.5px;">BOTTOM BACK</text>
+
+            <!-- Crown icon at top -->
+            <text x="110" y="32" text-anchor="middle" font-size="18" fill="rgba(191,154,63,.5)">👑</text>
           </svg>
 
           <p class="jacket-hint" id="jacket-hint">
@@ -976,6 +950,11 @@
         <p style="margin-top:14px; font-size:13px; font-style:italic; color:var(--muted);">
           Service sponsors receive the same jacket placement and benefits as their matched cash tier.
         </p>
+        <div style="margin-top:16px; padding:16px 18px; background:var(--blush-l); border:1px solid var(--border); border-radius:6px;">
+          <p style="font-size:13.5px; color:var(--ink); line-height:1.6;">
+            <strong style="color:var(--rose-d);">✦ Glam Team Guarantee:</strong> every service sponsor, including hair, makeup, nails, skincare, and beyond, is tagged in every post where I'm showing off their artistry, no matter your tier.
+          </p>
+        </div>
       </div>
       <div class="service-half">
         <h3>Services I'm looking for</h3>
@@ -1196,38 +1175,43 @@
 
     <div class="video-carousel fade-up">
       <div class="video-card">
-        <div class="video-thumb" style="background:linear-gradient(160deg, var(--rose-l), var(--rose-d));" onclick="alert('Add your video link here')">
-          <span class="video-play">▶</span>
-        </div>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kami.apter/video/7519703561828191501" data-video-id="7519703561828191501" style="max-width: 100%; min-width: 100%; margin: 0;">
+          <section>
+            <a target="_blank" href="https://www.tiktok.com/@kami.apter">@kami.apter</a>
+          </section>
+        </blockquote>
         <div class="video-info">
           <h4>Tuspazio Aesthetics</h4>
           <p>Facial & skincare feature reel</p>
         </div>
       </div>
       <div class="video-card">
-        <div class="video-thumb" style="background:linear-gradient(160deg, var(--gold-l), var(--gold));" onclick="alert('Add your video link here')">
-          <span class="video-play">▶</span>
-        </div>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kami.apter/video/7521173330250976526" data-video-id="7521173330250976526" style="max-width: 100%; min-width: 100%; margin: 0;">
+          <section>
+            <a target="_blank" href="https://www.tiktok.com/@kami.apter">@kami.apter</a>
+          </section>
+        </blockquote>
         <div class="video-info">
-          <h4>Monarch Manifesto</h4>
+          <h4>Valencia Couture</h4>
           <p>Behind-the-scenes vlog feature</p>
         </div>
       </div>
       <div class="video-card">
-        <div class="video-thumb" style="background:linear-gradient(160deg, var(--rose), var(--ink));" onclick="alert('Add your video link here')">
-          <span class="video-play">▶</span>
-        </div>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kami.apter/video/7554944488871841038" data-video-id="7554944488871841038" style="max-width: 100%; min-width: 100%; margin: 0;">
+          <section>
+            <a target="_blank" href="https://www.tiktok.com/@kami.apter">@kami.apter</a>
+          </section>
+        </blockquote>
         <div class="video-info">
-          <h4>Sabor Studios</h4>
+          <h4>West Texas Teeth GlowUp</h4>
           <p>Pageant prep day, shot & edited</p>
         </div>
       </div>
       <div class="video-card">
-        <div class="video-thumb" style="background:linear-gradient(160deg, var(--blush), var(--rose-l));" onclick="alert('Add your video link here')">
-          <span class="video-play">▶</span>
-        </div>
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DXSVZ1Dp2In/" data-instgrm-version="14" style="max-width: 100%; min-width: 100%; margin: 0;">
+        </blockquote>
         <div class="video-info">
-          <h4>Get-Ready-With-Me</h4>
+          <h4>Sterlings Hair Salon</h4>
           <p>Competition morning reel</p>
         </div>
       </div>
@@ -1372,12 +1356,16 @@
 
 <script>
   /* ── TAB NAVIGATION ── */
-  function showPage(name) {
+  function showPage(name, clickedEl) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('[data-page="' + name + '"]').forEach(p => p.classList.add('active'));
     document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
-    const navBtn = document.getElementById('navtab-' + name);
-    if (navBtn) navBtn.classList.add('active');
+    if (clickedEl) {
+      clickedEl.classList.add('active');
+    } else {
+      const navBtn = document.getElementById('navtab-' + name);
+      if (navBtn) navBtn.classList.add('active');
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
     document.querySelectorAll('[data-page="' + name + '"] .fade-up').forEach(el => el.classList.add('visible'));
     if (name === 'foundation') {
@@ -1392,23 +1380,23 @@
   const tierZones = {
     premier: {
       back: true, chest: false, sleeve: false, lining: false,
-      label: 'Premier — Large Logo, Upper Back or Front',
+      label: 'Premier — Large Logo, Upper Back',
       hint: 'The most visible position on the jacket — seen in every photo.'
     },
     gold: {
       back: false, chest: true, sleeve: false, lining: false,
-      label: 'Gold — Medium Logo, Lower Back',
+      label: 'Gold — Medium Logo, Mid Back',
       hint: 'Still highly visible, just below the Premier zone.'
     },
     silver: {
       back: false, chest: false, sleeve: true, lining: false,
-      label: 'Silver — Small Logo, Sleeve or Lower Back',
-      hint: 'Sleeve placement shows in close-up and candid shots.'
+      label: 'Silver — Small Logo, Lower Back',
+      hint: 'A clean, visible spot lower on the back panel.'
     },
     bronze: {
       back: false, chest: false, sleeve: false, lining: true,
-      label: 'Bronze — Business Name, Bottom Hem',
-      hint: 'Your name lining the bottom of the jacket.'
+      label: 'Bronze — Business Name, Bottom Back',
+      hint: 'Your name lining the bottom of the back panel.'
     }
   };
 
@@ -1488,5 +1476,7 @@
   fixAboutGrid();
   window.addEventListener('resize', fixAboutGrid);
 </script>
+<script async src="https://www.tiktok.com/embed.js"></script>
+<script async src="https://www.instagram.com/embed.js"></script>
 </body>
 </html>
