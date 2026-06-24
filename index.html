@@ -505,6 +505,10 @@
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       border: none; display: block;
     }
+    .video-frame-wrap video {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover; display: block; background: var(--ink);
+    }
     .video-thumb {
       width: 100%; aspect-ratio: 9/16; background: var(--ink);
       position: relative; display: flex; align-items: center; justify-content: center;
@@ -1184,42 +1188,38 @@
     <div class="video-carousel fade-up">
       <div class="video-card">
         <div class="video-frame-wrap">
-          <iframe src="https://www.tiktok.com/embed/v2/7519703561828191501" allow="encrypted-media" allowfullscreen loading="lazy"></iframe>
+          <video src="tuspazio-aesthetics.mp4" controls preload="metadata" playsinline></video>
         </div>
         <div class="video-info">
           <h4>Tuspazio Aesthetics</h4>
-          <p>Facial & skincare feature reel</p>
         </div>
       </div>
       <div class="video-card">
         <div class="video-frame-wrap">
-          <iframe src="https://www.tiktok.com/embed/v2/7521173330250976526" allow="encrypted-media" allowfullscreen loading="lazy"></iframe>
+          <video src="valencia-couture.mp4" controls preload="metadata" playsinline></video>
         </div>
         <div class="video-info">
           <h4>Valencia Couture</h4>
-          <p>Behind-the-scenes vlog feature</p>
         </div>
       </div>
       <div class="video-card">
         <div class="video-frame-wrap">
-          <iframe src="https://www.tiktok.com/embed/v2/7554944488871841038" allow="encrypted-media" allowfullscreen loading="lazy"></iframe>
+          <video src="west-texas-teeth-glowup.mp4" controls preload="metadata" playsinline></video>
         </div>
         <div class="video-info">
           <h4>West Texas Teeth GlowUp</h4>
-          <p>Pageant prep day, shot & edited</p>
         </div>
       </div>
       <div class="video-card">
         <div class="video-frame-wrap">
-          <iframe src="https://www.instagram.com/reel/DXSVZ1Dp2In/embed" allow="encrypted-media" allowfullscreen loading="lazy"></iframe>
+          <video src="sterling-hair-salon.mp4" controls preload="metadata" playsinline></video>
         </div>
         <div class="video-info">
           <h4>Sterlings Hair Salon</h4>
-          <p>Competition morning reel</p>
         </div>
       </div>
     </div>
-    <p class="video-hint">Tap a thumbnail to watch · swipe to see more →</p>
+    <p class="video-hint">Tap a video to watch · swipe to see more →</p>
   </div>
 </section>
 
