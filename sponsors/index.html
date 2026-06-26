@@ -1746,11 +1746,13 @@
   };
   window.KAMI_PAGE_CONTEXT = "You are currently on your sponsorship proposal page, which lays out sponsorship tiers (Heart of Texas $1,000+, Lone Star $500, Bluebonnet $250, Wildflower $100) and a service-sponsorship option, plus a jacket logo placement diagram and an inquiry form.";
   window.KAMI_QUICK_REPLIES = [
-    "How can I sponsor you?",
-    "What is Little Visionaries?",
-    "What is Miss Heart of Texas?"
+    { icon: "💌", text: "How can I sponsor you?" },
+    { icon: "👓", text: "What is Little Visionaries?" },
+    { icon: "👑", text: "What is Miss Heart of Texas?" }
   ];
-  window.KAMI_ON_BOOKING = scrollToSponsorForm;
+  window.KAMI_LINKS = {
+    sponsors: { label: "See Sponsorship Tiers", icon: "💌", onClick: scrollToSponsorForm }
+  };
 </script>
 <script src="/chat-widget.js"></script>
 </body>
