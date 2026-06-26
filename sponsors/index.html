@@ -394,6 +394,7 @@
     @media(max-width:760px){
       .tiers-layout { grid-template-columns: 1fr; }
       .jacket-col { display: flex; justify-content: center; margin-top: 8px; }
+      .jacket-col:empty { display: none; margin: 0; }
       .jacket-wrap { transition: box-shadow .3s; }
       .jacket-wrap {
         opacity: 0;
@@ -402,6 +403,9 @@
       }
       .jacket-wrap.replay {
         animation: jacketPopIn .55s cubic-bezier(.22,1,.36,1) forwards;
+      }
+      .tier-card .jacket-wrap {
+        width: 100%; margin-top: 18px;
       }
     }
     @keyframes jacketPopIn {
@@ -417,6 +421,7 @@
       border-radius: 18px; padding: 22px 24px;
       cursor: pointer; transition: all .25s;
       position: relative; overflow: hidden;
+      scroll-margin-top: 104px;
     }
     .tier-card::before {
       content: ''; position: absolute; left: 0; top: 0; bottom: 0;
@@ -1076,8 +1081,8 @@
       </div>
 
       <!-- RIGHT: JACKET DIAGRAM -->
-      <div class="jacket-col fade-up">
-        <div class="jacket-wrap">
+      <div class="jacket-col fade-up" id="jacket-col">
+        <div class="jacket-wrap" id="jacket-wrap">
           <p class="jacket-label" id="jacket-label">Premier — Upper Back</p>
 
           <!-- SVG Jacket Diagram -->
@@ -1624,20 +1629,53 @@
     document.getElementById('jacket-label').textContent = z.label;
     document.getElementById('jacket-hint').textContent = z.hint;
 
-    // visual pulse + gentle scroll-into-view nudge on small screens
-    const jacketWrap = document.querySelector('.jacket-wrap');
+    // visual pulse on the jacket
+    const jacketWrap = document.getElementById('jacket-wrap');
     if (jacketWrap) {
-      jacketWrap.style.boxShadow = '0 0 0 3px rgba(191,154,63,.5), 0 18px 40px rgba(196,96,122,.18)';
+      jacketWrap.style.boxShadow = '0 0 0 3px rgba(191,154,63,.5), 0 18px 40px rgba(242,139,176,.18)';
       setTimeout(() => { jacketWrap.style.boxShadow = ''; }, 500);
+
       if (window.innerWidth <= 760) {
-        // re-trigger the pop-in animation on every tier change
+        // move the jacket into the active card so it expands open in place — no scrolling needed
+        card.appendChild(jacketWrap);
+        // re-trigger the pop-in animation every time it's moved/reopened
         jacketWrap.classList.remove('replay');
         void jacketWrap.offsetWidth; // force reflow so the animation restarts
         jacketWrap.classList.add('replay');
-        jacketWrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        // bring the TOP of the tapped tier (name + price) just under the floating nav,
+        // so the tier details are read first, with the jacket appearing further down on scroll.
+        // Wait for the other cards' collapse/expand transitions (~.35s) to finish first,
+        // so we scroll to where the card ends up, not where it started.
+        setTimeout(() => {
+          card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 360);
+      } else {
+        // on desktop, make sure the jacket lives back in its sticky column
+        const home = document.getElementById('jacket-col');
+        if (home && jacketWrap.parentElement !== home) home.appendChild(jacketWrap);
       }
     }
   }
+
+  // if the viewport is resized across the mobile breakpoint, snap the jacket back to its sticky desktop home
+  window.addEventListener('resize', () => {
+    const jacketWrap = document.getElementById('jacket-wrap');
+    const home = document.getElementById('jacket-col');
+    if (!jacketWrap || !home) return;
+    if (window.innerWidth > 760 && jacketWrap.parentElement !== home) {
+      home.appendChild(jacketWrap);
+    }
+  });
+
+  // on first load, if we're on mobile, the jacket should already live inside the active tier card
+  document.addEventListener('DOMContentLoaded', () => {
+    if (window.innerWidth <= 760) {
+      const activeCard = document.querySelector('.tier-card.active');
+      const jacketWrap = document.getElementById('jacket-wrap');
+      if (activeCard && jacketWrap) activeCard.appendChild(jacketWrap);
+    }
+  });
 
   /* ── FORM SUBMISSION ── */
   const form = document.getElementById('sponsorForm');
