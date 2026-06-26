@@ -1729,6 +1729,29 @@
   }
   fixAboutGrid();
   window.addEventListener('resize', fixAboutGrid);
+
+  // ── CHATBOT CONFIG (page-specific) ──
+  function scrollToSponsorForm() {
+    const form = document.getElementById('sponsorForm');
+    if (form) form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (window.kamiToggleChat) window.kamiToggleChat();
+  }
+  window.KAMI_THEME = {
+    accent: '#F9B4D0',
+    accentDark: '#D9588A',
+    blush: '#FCE4ED',
+    blushLight: '#FFF5F9',
+    ink: '#3A2229',
+    border: 'rgba(242,139,176,.18)'
+  };
+  window.KAMI_PAGE_CONTEXT = "You are currently on your sponsorship proposal page, which lays out sponsorship tiers (Heart of Texas $1,000+, Lone Star $500, Bluebonnet $250, Wildflower $100) and a service-sponsorship option, plus a jacket logo placement diagram and an inquiry form.";
+  window.KAMI_QUICK_REPLIES = [
+    "How can I sponsor you?",
+    "What is Little Visionaries?",
+    "What is Miss Heart of Texas?"
+  ];
+  window.KAMI_ON_BOOKING = scrollToSponsorForm;
 </script>
+<script src="/chat-widget.js"></script>
 </body>
 </html>
