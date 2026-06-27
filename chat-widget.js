@@ -150,7 +150,7 @@
   var DEFAULT_LINKS = {
     sponsors: { url: "https://kamiapter.com/sponsors", label: "Sponsor Me", icon: "\ud83d\udc8c" },
     modeling: { url: "https://kamiapter.com/modeling", label: "Modeling Portfolio", icon: "\ud83d\udcf7" },
-    visionaries: { url: "https://littlevisionaries-placeholder.org", label: "Little Visionaries", icon: "\ud83d\udc53" },
+    visionaries: { url: "https://kamiapter.com/littlevisionaries", label: "Little Visionaries", icon: "\ud83d\udc53" },
     alex: { url: "https://www.instagram.com/alexfilmsinc", label: "@alexfilmsinc", icon: "\ud83c\udfa5" }
   };
   var LINKS = Object.assign({}, DEFAULT_LINKS, window.KAMI_LINKS || {});
