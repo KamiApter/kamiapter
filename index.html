@@ -182,7 +182,7 @@
       padding: 16px 18px;
       display: flex;
       align-items: center;
-      gap: 14px;
+      position: relative;
       text-decoration: none;
       color: #4a2e36;
       box-shadow: 0 4px 14px rgba(255,143,171,0.12);
@@ -195,9 +195,11 @@
       background: var(--pink-dim);
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
+      position: absolute;
+      left: 18px;
     }
     .link-icon svg { width: 18px; height: 18px; fill: var(--pink-deep); }
-    .link-text { flex: 1; }
+    .link-text { flex: 1; text-align: center; }
     .link-title { font-weight: 600; font-size: 15px; }
     .link-sub { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
     .link-arrow { font-size: 18px; color: var(--pink-deep); }
@@ -487,7 +489,6 @@
         <div class="link-text">
           <div class="link-title sponsor-title">Sponsor Me!</div>
         </div>
-        <div class="link-arrow sponsor-arrow">→</div>
       </a>
 
       <a class="link-card reveal" href="https://kamiapter.com/modeling" target="_blank" rel="noreferrer">
@@ -495,7 +496,6 @@
         <div class="link-text">
           <div class="link-title">Modeling Portfolio</div>
         </div>
-        <div class="link-arrow">→</div>
       </a>
 
       <a class="link-card reveal" href="https://kamiapter.com/littlevisionaries" target="_blank" rel="noreferrer">
@@ -506,7 +506,6 @@
         <div class="link-text">
           <div class="link-title">Little Visionaries</div>
         </div>
-        <div class="link-arrow">→</div>
       </a>
 
       <a class="link-card reveal" href="https://www.instagram.com/kamilaandalex" target="_blank" rel="noreferrer">
@@ -514,7 +513,6 @@
         <div class="link-text">
           <div class="link-title">Couples Page</div>
         </div>
-        <div class="link-arrow">→</div>
       </a>
     </div>
 
